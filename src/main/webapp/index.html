@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+
+        <script>
+            var app = angular.module("myModule", ["ngRoute"]);
+
+            app.controller("myController", [function() {
+                    var self = this;
+                    self.persons = [
+                        {id: 1, name: "Jens", age: 18}
+                        , {id: 2, name: "Peter", age: 23}
+                        , {id: 3, name: "Hanne", age: 23}
+                    ];
+                    self.title = "Person List";
+                    self.indexNumber = 0;
+                    
+                    self.createPerson = function(){
+                    self.persons.push(self.newPerson); 
+                    self.newPerson = '';
+                    };
+                }]);
+
+            app.config(function ($routeProvider) {
+                $routeProvider
+                        .when("/", {
+                            templateUrl: "tabel.html"
+                        })
+
+                        .when("/newperson",{
+                           templateUrl:"newPerson.html" 
+                        })
+                        .when("/:id", {
+                            templateUrl: "detail.html"
+                        });
+                    });
+        </script>
+    </head>
+
+    <body ng-controller="myController as ctrl">
+        
+        <a href="#/">All persons</a>
+        <a href="#/newperson">New person</a>
+        <h1 ng-bind="ctrl.title">Title</h1>
+        
+        <div ng-view ></div>
+          
+    </body>
+</html>

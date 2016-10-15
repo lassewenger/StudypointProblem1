@@ -1,0 +1,15 @@
+
+<table>
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Details</td>
+        </tr>  
+    </thead>
+    <tbody>
+        <tr ng-repeat="p in ctrl.persons">
+            <td>{{p.name}}</td>
+            <td><a href="#{{p.id}}" ng-click="ctrl.indexNumber = $index">{{p.id}}</a></td>
+        </tr>
+    </tbody>
+</table>
